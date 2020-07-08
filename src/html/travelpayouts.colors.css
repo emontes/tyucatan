@@ -1,0 +1,93 @@
+/*
+===============
+Navbar
+===============
+*/
+
+a { 
+    text-decoration: none;
+}
+
+
+.navbar {
+    --max-width: 1170px;
+    --clr-black: #0a0c10;
+    --spacing: 0.1rem;
+    --ff-secondary: "Open Sans", sans-serif;
+  --transition: all 0.3s linear;
+  --radius: 0.25rem;
+  --clr-primary-5: hsl(245, 62%, 45%);
+  /* lighter shades of primary color */
+  --clr-primary-6: hsl(245, 57%, 50%);
+  --clr-primary-7: hsl(245, 65%, 59%);
+  --clr-primary-8: hsl(245, 80%, 74%);
+  --clr-primary-9: hsl(245, 94%, 87%);
+  --clr-primary-10: hsl(245, 87%, 94%);
+    
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  background: var(--clr-primary-10);
+}
+.nav-center {
+  width: 90vw;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  display: block;
+  height: 40px;
+}
+.nav-logo img {
+  height: 100%;
+}
+
+.nav-links {
+  display: none;
+  list-style-type: none;
+}
+
+@media screen and (min-width: 800px) {
+  .toggle-btn {
+    display: none;
+  }
+  .nav-center {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 2rem;
+    align-items: center;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  .page-link {
+    margin-right: 1rem;
+  }
+  .page-link {
+    color: var(--clr-black);
+    font-weight: bold;
+    letter-spacing: var(--spacing);
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: var(--ff-secondary);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius);
+  }
+  .page-link:hover {
+    background: var(--clr-primary-5);
+    color: var(--clr-primary-10);
+  }
+}
+
+/*
+============================
+Termina Navbar de TYucatan
+============================
+*/
