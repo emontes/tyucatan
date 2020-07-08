@@ -2,13 +2,14 @@ const path = require("path")
 
 // create pages dynamically
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
   const result = await graphql(`
     {
       allMdx {
         nodes {
           frontmatter {
             slug
+            redirects
           }
         }
       }
@@ -18,7 +19,23 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  result.data.allMdx.nodes.forEach(({ frontmatter: { slug } }) => {
+  // createRedirect({ fromPath: '/old-url', toPath: '/new-url', isPermanent: true });
+  // createRedirect({ fromPath: '/url', toPath: '/zn-CH/url', Language: 'zn' });
+
+  result.data.allMdx.nodes.forEach(({ frontmatter: { slug, redirects } }) => {
+
+    if (redirects) {
+      console.log(redirects)
+      redirects.forEach( fromPath => {
+        
+        createRedirect({
+          fromPath: fromPath,
+          toPath: `/posts/${slug}`,
+          redirectInBrowser: true,
+          isPermanent: true
+        })
+      })
+    }      
 
     createPage({
       path: `/posts/${slug}`,
@@ -28,6 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
   result.data.categories.distinct.forEach(category => {
     createPage({
       path: `/${category}`,

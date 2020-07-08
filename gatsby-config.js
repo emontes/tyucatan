@@ -4,6 +4,7 @@ module.exports = {
     description: `Blog de viajes para conocer el estado de Yucatán, México`,
     titleTemplate: `%s | TYucatan`,
     url: `https://tyucatan.com/`,
+    siteUrl: `https://tyucatan.com/`,
     image: `mainImg.png`,
     twitterUsername: `@turistamexico`,
   },
@@ -12,7 +13,8 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
     'gatsby-plugin-react-leaflet',
-
+    `gatsby-plugin-sitemap`,
+    
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -59,6 +61,6 @@ module.exports = {
         username: `yucatanturismo`,
       },
     },
-    `gatsby-plugin-meta-redirect`, //Este debe de estar al último
+
   ],
 }
