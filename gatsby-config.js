@@ -14,6 +14,7 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     'gatsby-plugin-react-leaflet',
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-netlify`,
     
     {
       resolve: `gatsby-source-filesystem`,
