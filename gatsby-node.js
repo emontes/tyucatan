@@ -55,4 +55,59 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
+  /* ---------------------------------------
+     ------------ Noticcias  --------------
+     --------------------------------------*/
+
+
+  // Crea páginas de Categorías
+  const resultCategorias = await graphql(`
+  {
+    categorias: allStrapiCategories(sort: {fields: articles___id, order: DESC}) {
+      nodes {
+        slug
+        title
+        articles {
+          id
+        }
+      }
+    }
+  }
+  `)
+
+  
+  resultCategorias.data.categorias.nodes.forEach(catego => {
+    createPage({
+      path: `/categoria/${catego.slug}`,
+      component: path.resolve(`src/templates/categoria-template.js`),
+      context: {
+        slug: catego.slug,
+        title: catego.title,
+      },
+    })
+
+    catego.articles.forEach(article => {
+      createPage({
+        path: `/article${article.id}.html`,      
+        component: path.resolve(`src/templates/article-template.js`),
+        context: {
+          strapiId: article.id
+        }
+      })
+
+      createPage({
+        path: `/printarticle-${article.id}.html`,      
+        component: path.resolve(`src/templates/article-print-template.js`),
+        context: {
+          strapiId: article.id
+        }
+      })
+    })
+  })
+
 }
+
+
+
+

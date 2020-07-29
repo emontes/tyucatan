@@ -5,6 +5,7 @@ import Posts from "../components/Posts"
 import { graphql } from "gatsby"
 import SEO from "../components/SEO"
 import Map from "../components/Map"
+import Noticias from "../components/Noticias"
 
 const popupContentGatsby = `
 <h4>Yucatán</h4>
@@ -24,12 +25,17 @@ const IndexPage = ({ data }) => {
     allMdx: { nodes: posts },
   } = data
 
+  const {
+    allStrapiArticle: { nodes: noticias },
+  } = data
+
   return (
     <Layout>
       <SEO title="Home" />
       <Hero showPerson />
       
       <Posts posts={posts} title="publicados recientemente" />
+      <Noticias noticias={noticias} title="Noticias" />
       <div style={{ width: "90%", margin: "auto" }}>
         <Map
           lat="20.618182"
@@ -62,6 +68,33 @@ export const query = graphql`
         }
         excerpt
         id
+      }
+    }
+    allStrapiArticle(sort: {order: DESC, fields: time}, limit: 3) {
+      totalCount
+      nodes {
+        strapiId
+        id
+        title
+        hometext
+        tiempoPlano:time
+        time(locale: "ES", formatString: "MMMM DD, YYYY")
+        category {
+          slug
+          title
+        }
+        topic {
+          slug
+          title
+          image {
+            childImageSharp {
+              fluid {
+                #srcSetWebp
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
       }
     }
   }

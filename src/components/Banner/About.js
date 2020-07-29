@@ -15,14 +15,21 @@ const query = graphql`
     }
   }
 `
-const About = () => {
+const About = (props) => {
   const data = useStaticQuery(query)
   return (
     <Wrapper>
-      <Title title="TYucatán" />
+      <Title title={props.title || "TYucatán"} />
       <Image fixed={data.file.childImageSharp.fixed} className="img" />
       <p>
-        La T es por turista, este es un blog de turismo en Yucatán desarrollado por <a href="https://turista.com.mx">Turista México</a>
+        {
+          props.description ||
+          <span dangerouslySetInnerHTML={{__html: 
+          "La T es por turista, este es un blog de turismo en Yucatán desarrollado por <a href='https://turista.com.mx'>Turista México</a>"}} 
+          />
+          
+        }
+        
       </p>
       <SocialLinks styleClass="banner-icons"></SocialLinks>
     </Wrapper>
