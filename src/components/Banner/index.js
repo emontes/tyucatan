@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import About from "./About"
-import Instagram from "./Instagram"
+// import Instagram from "./Instagram"
 import Recent from "./Recent"
 import BannerCategories from "./BannerCategories"
 import HotelsBox from "./HotelsBox"
@@ -11,7 +11,7 @@ const Banner = () => {
     <Wrapper>
       <About />
       <HotelsBox />
-      <Instagram />
+      {/* <Instagram /> */}
       <Recent />
       <BannerCategories />
     </Wrapper>
