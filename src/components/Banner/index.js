@@ -11,7 +11,7 @@ const Banner = () => {
     <Wrapper>
       <About />
       <HotelsBox />
-      {/* <Instagram /> */}
+      
       <Recent />
       <BannerCategories />
     </Wrapper>
