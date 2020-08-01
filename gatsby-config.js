@@ -66,12 +66,12 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-source-instagram`,
-      options: {
-        username: `yucatanturismo`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-instagram`,
+    //   options: {
+    //     username: `yucatanturismo`,
+    //   },
+    // },
 
   ],
 }
