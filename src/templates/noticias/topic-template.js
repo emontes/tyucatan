@@ -1,32 +1,39 @@
 import React from "react"
-import Layout from "../components/Layout"
-import Hero from "../components/Hero"
+import Layout from "../../components/Layout"
+import Hero from "../../components/Hero"
 import { graphql } from "gatsby"
-import Noticias from "../components/Noticias"
+import Noticias from "../../components/Noticias"
 
-const NoticiasPage = ( {data} ) => {
+const Categoria = ({ data, pageContext }) => {
   const {
     allStrapiArticle: { nodes: noticias },
   } = data
-  
+
+  console.log("--- de categories-tamplate pageContext: ", pageContext)
+
   return (
     <Layout>
       <Hero />
-      <Noticias noticias={noticias} title="Últimas Noticias"/>
+      <Noticias noticias={noticias} title={`Artículos del Tema: ${pageContext.title}`} />
     </Layout>
   )
 }
 
 export const query = graphql`
-  {
-    allStrapiArticle(sort: {order: DESC, fields: time}, limit: 30) {
+  query ($slug: String){
+    allStrapiArticle(
+      
+      sort: { order: DESC, fields: time }
+      limit: 20
+      filter: { topic: { slug: { eq: $slug } } }
+    ) {
       totalCount
       nodes {
         strapiId
         id
         title
         hometext
-        tiempoPlano:time
+        tiempoPlano: time
         time(locale: "ES", formatString: "MMMM DD, YYYY")
         category {
           slug
@@ -38,7 +45,7 @@ export const query = graphql`
           image {
             childImageSharp {
               fluid {
-                #srcSet
+                #srcSetWebp
                 ...GatsbyImageSharpFluid
               }
             }
@@ -48,5 +55,4 @@ export const query = graphql`
     }
   }
 `
-
-export default NoticiasPage
+export default Categoria

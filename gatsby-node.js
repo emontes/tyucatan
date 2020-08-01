@@ -57,9 +57,31 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   /* ---------------------------------------
-     ------------ Noticcias  --------------
+     ------------ Noticias  --------------
      --------------------------------------*/
 
+  // Crea las páginas de Temas
+  const resultTopics = await graphql(`
+  {
+    topics: allStrapiTopic(sort: {fields: articles___id, order: DESC}) {
+      nodes {
+        slug
+        title
+      }
+    }
+  }
+  `)
+
+  resultTopics.data.topics.nodes.forEach(item => {
+    createPage({
+      path: `/tema/${item.slug}`,
+      component: path.resolve(`src/templates/noticias/topic-template.js`),
+      context: {
+        slug: item.slug,
+        title: item.title,
+      },
+    })
+  })
 
   // Crea páginas de Categorías
   const resultCategorias = await graphql(`

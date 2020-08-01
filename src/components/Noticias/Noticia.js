@@ -16,17 +16,17 @@ const Noticia = ({
 }) => {
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
-
+  
   return (
     <Wrapper>
       <Link to={`/article${strapiId}.html`}>
         <h3>{title}</h3>
-        <Image 
+        {topic.image && <Image 
           className="image" 
           fluid={topic.image.childImageSharp.fluid} 
           alt={topic.title}
           title={topic.title}
-        />
+        /> }
         {anyo < 2018 ? (
           <div dangerouslySetInnerHTML={{ __html: hometext }} />
         ) : (

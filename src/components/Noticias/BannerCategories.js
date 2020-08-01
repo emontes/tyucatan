@@ -1,13 +1,20 @@
 import React from "react"
 import styled from "styled-components"
 import Categories from "./Categories"
+import Topics from "./Topics"
 import Title from "../Banner/Title"
 const BannerCategories = () => {
   return (
+    <>
     <Wrapper>
       <Title title="Categorias" />
       <Categories />
     </Wrapper>
+    <Wrapper>
+      <Title title="Temas" />
+      <Topics />
+    </Wrapper>
+    </>
   )
 }
 const Wrapper = styled.div`
