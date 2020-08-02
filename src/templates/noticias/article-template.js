@@ -59,7 +59,7 @@ const NoticiaTemplate = ({ data }) => {
           {anyo < 2018 ? (
             <>
               <div dangerouslySetInnerHTML={{ __html: hometext }} />
-              {imagen[0] && (
+              {imagen[0].formats.medium && (
                 <Image
                   className="image"
                   fluid={imagen[0].formats.medium.childImageSharp.fluid}
