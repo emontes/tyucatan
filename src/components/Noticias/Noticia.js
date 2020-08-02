@@ -25,11 +25,16 @@ const Noticia = ({
         {
           imagen[0] 
           ?
-          <Image
+          <>
+            {
+              imagen[0].formats &&
+                <Image
                   className="image"
                   fluid={imagen[0].formats.medium.childImageSharp.fluid}
                   alt={imagen[0].alternativeText}
                 />
+            }
+          </>
           :
           topic.image && (
           <Image

@@ -1,8 +1,8 @@
 import React from "react"
-import Layout from "../components/Layout"
-import Hero from "../components/Hero"
+import Layout from "../../components/Layout"
+import Hero from "../../components/Hero"
 import { graphql } from "gatsby"
-import Noticias from "../components/Noticias"
+import Noticias from "../../components/Noticias"
 
 const Categoria = ({ data, pageContext }) => {
   const {

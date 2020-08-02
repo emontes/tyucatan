@@ -99,7 +99,7 @@ exports.createPages = async ({ graphql, actions }) => {
   resultCategorias.data.categorias.nodes.forEach(catego => {
     createPage({
       path: `/categoria/${catego.slug}`,
-      component: path.resolve(`src/templates/categoria-template.js`),
+      component: path.resolve(`src/templates/noticias/categoria-template.js`),
       context: {
         slug: catego.slug,
         title: catego.title,
@@ -109,7 +109,7 @@ exports.createPages = async ({ graphql, actions }) => {
     catego.articles.forEach(article => {
       createPage({
         path: `/article${article.id}.html`,      
-        component: path.resolve(`src/templates/article-template.js`),
+        component: path.resolve(`src/templates/noticias/article-template.js`),
         context: {
           strapiId: article.id
         }
@@ -117,7 +117,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
       createPage({
         path: `/printarticle-${article.id}.html`,      
-        component: path.resolve(`src/templates/article-print-template.js`),
+        component: path.resolve(`src/templates/noticias/article-print-template.js`),
         context: {
           strapiId: article.id
         }
