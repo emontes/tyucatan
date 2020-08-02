@@ -27,7 +27,7 @@ const Noticia = ({
           ?
           <>
             {
-              imagen[0].formats &&
+              imagen[0].formats.medium &&
                 <Image
                   className="image"
                   fluid={imagen[0].formats.medium.childImageSharp.fluid}
