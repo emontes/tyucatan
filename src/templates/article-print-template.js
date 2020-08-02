@@ -1,10 +1,25 @@
 import React from "react"
 import styled from "styled-components"
+import Image from "gatsby-image"
+
+import ReactMarkdown from "react-markdown"
 
 import { graphql } from "gatsby"
 const NoticiaTemplate = ({ data }) => {
-  const { title, created_at, category, hometext, bodytext } = data.article
-  const ligaRetorno= `https://tyucatan.com/article${data.article.strapiId}.html`
+  const {
+    title,
+    tiempoPlano,
+    time,
+    category,
+    hometext,
+    bodytext,
+    imagen,
+  } = data.article
+  const ligaRetorno = `https://tyucatan.com/article${data.article.strapiId}.html`
+
+  const fecha = new Date(tiempoPlano)
+  const anyo = fecha.getFullYear()
+
   return (
     <Wrapper>
       <article>
@@ -14,24 +29,42 @@ const NoticiaTemplate = ({ data }) => {
           )}
 
           <h2>{title}</h2>
-          <p>{created_at}</p>
+          <p>{time}</p>
           <div className="underline"></div>
         </div>
 
-        <div dangerouslySetInnerHTML={{ __html: hometext }} />
-
-        <div dangerouslySetInnerHTML={{ __html: bodytext }} />
+        {anyo < 2018 ? (
+          <>
+            <div dangerouslySetInnerHTML={{ __html: hometext }} />
+            {imagen[0] && (
+              <Image fluid={imagen[0].formats.medium.childImageSharp.fluid} />
+            )}
+            <div dangerouslySetInnerHTML={{ __html: bodytext }} />
+          </>
+        ) : (
+          <>
+            <ReactMarkdown source={hometext} />
+            {imagen[0] && (
+              <Image fluid={imagen[0].formats.medium.childImageSharp.fluid} />
+            )}
+            <ReactMarkdown source={bodytext} />
+          </>
+        )}
       </article>
-      El Artículo viene de:&nbsp;  
-      <a href={ligaRetorno}>{ligaRetorno}</a>
+      <br />
+      <p>
+        El Artículo viene de:&nbsp;
+        <a href={ligaRetorno}>{ligaRetorno}</a>
+      </p>
     </Wrapper>
   )
 }
 export const query = graphql`
   query ArticlePrint($strapiId: Int) {
     article: strapiArticle(strapiId: { eq: $strapiId }) {
-      created_at(locale: "ES", formatString: "ddd de  MMM, YYYY")
       strapiId
+      tiempoPlano: time
+      time(locale: "ES", formatString: "ddd MMMM DD, YYYY")
       title
       category {
         slug
@@ -40,6 +73,19 @@ export const query = graphql`
       }
       hometext
       bodytext
+      imagen {
+        alternativeText
+        formats {
+          medium {
+            childImageSharp {
+              fluid {
+                #srcSet
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
+        }
+      }
     }
   }
 `
@@ -74,7 +120,6 @@ const Wrapper = styled.section`
       margin-bottom: 1rem;
     }
   }
-  
 `
 
 export default NoticiaTemplate

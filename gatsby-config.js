@@ -30,6 +30,7 @@ module.exports = {
         path: `${__dirname}/src/posts`,
       },
     },
+
     {
       resolve: `gatsby-source-strapi`,
       options: {
@@ -40,6 +41,7 @@ module.exports = {
         
       },
     },
+    
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -66,12 +68,6 @@ module.exports = {
         ],
       },
     },
-    // {
-    //   resolve: `gatsby-source-instagram`,
-    //   options: {
-    //     username: `yucatanturismo`,
-    //   },
-    // },
 
   ],
 }

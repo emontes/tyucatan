@@ -39,6 +39,21 @@ export const query = graphql`
           slug
           title
         }
+
+        imagen {
+          alternativeText
+          formats {
+            medium {
+              childImageSharp {
+                fluid {
+                  #srcSet
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+        }
+
         topic {
           slug
           title

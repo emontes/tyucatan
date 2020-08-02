@@ -13,20 +13,33 @@ const Noticia = ({
   strapiId,
   category,
   topic,
+  imagen,
 }) => {
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
-  
+
   return (
     <Wrapper>
       <Link to={`/article${strapiId}.html`}>
         <h3>{title}</h3>
-        {topic.image && <Image 
-          className="image" 
-          fluid={topic.image.childImageSharp.fluid} 
-          alt={topic.title}
-          title={topic.title}
-        /> }
+        {
+          imagen[0] 
+          ?
+          <Image
+                  className="image"
+                  fluid={imagen[0].formats.medium.childImageSharp.fluid}
+                  alt={imagen[0].alternativeText}
+                />
+          :
+          topic.image && (
+          <Image
+            className="image"
+            fluid={topic.image.childImageSharp.fluid}
+            alt={topic.title}
+            title={topic.title}
+          />
+          )
+        }
         {anyo < 2018 ? (
           <div dangerouslySetInnerHTML={{ __html: hometext }} />
         ) : (
@@ -64,10 +77,10 @@ const Wrapper = styled.article`
   }
 
   .image {
-      width: 116px;
-      border-radius: var(--radius);
-      float: left;
-      margin-right: 1rem;
+    width: 116px;
+    border-radius: var(--radius);
+    float: left;
+    margin-right: 1rem;
   }
 
   .category {

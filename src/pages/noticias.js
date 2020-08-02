@@ -8,7 +8,7 @@ const NoticiasPage = ( {data} ) => {
   const {
     allStrapiArticle: { nodes: noticias },
   } = data
-  
+  console.log (' -----> Desde Noticias.js Data: ', data)
   return (
     <Layout>
       <Hero />
@@ -32,6 +32,7 @@ export const query = graphql`
           slug
           title
         }
+        
         topic {
           slug
           title
@@ -40,6 +41,20 @@ export const query = graphql`
               fluid {
                 #srcSet
                 ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+
+        imagen {
+          alternativeText
+          formats {
+            medium {
+              childImageSharp {
+                fluid {
+                  #srcSet
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
               }
             }
           }
