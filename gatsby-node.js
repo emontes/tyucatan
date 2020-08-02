@@ -19,13 +19,10 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  // createRedirect({ fromPath: '/old-url', toPath: '/new-url', isPermanent: true });
-  // createRedirect({ fromPath: '/url', toPath: '/zn-CH/url', Language: 'zn' });
-
   result.data.allMdx.nodes.forEach(({ frontmatter: { slug, redirects } }) => {
 
     if (redirects) {
-      console.log(redirects)
+      
       redirects.forEach( fromPath => {
         
         createRedirect({

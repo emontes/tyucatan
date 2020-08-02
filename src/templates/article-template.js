@@ -20,7 +20,7 @@ const NoticiaTemplate = ({ data }) => {
     bodytext,
     imagen,
   } = data.article
-  console.log("------- de Article Template Data: ", data)
+  
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
   return (

@@ -8,7 +8,7 @@ import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import SEO from "../components/SEO"
 const PostTemplate = ({ data }) => {
-  console.log(data)
+  
   const {
     mdx: {
       frontmatter: { title, description, category, image, date },

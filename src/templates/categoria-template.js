@@ -9,8 +9,6 @@ const Categoria = ({ data, pageContext }) => {
     allStrapiArticle: { nodes: noticias },
   } = data
 
-  console.log("--- de categories-tamplate pageContext: ", pageContext)
-
   return (
     <Layout>
       <Hero />

@@ -8,7 +8,7 @@ const NoticiasPage = ( {data} ) => {
   const {
     allStrapiArticle: { nodes: noticias },
   } = data
-  console.log (' -----> Desde Noticias.js Data: ', data)
+  
   return (
     <Layout>
       <Hero />
