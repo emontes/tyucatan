@@ -22,7 +22,7 @@ const NoticiaTemplate = ({ data }) => {
     bodytext,
     imagen,
   } = data.article
-  
+  console.log ("Articulo Id: ", strapiId)
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
   return (
