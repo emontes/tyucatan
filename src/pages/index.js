@@ -87,7 +87,7 @@ export const query = graphql`
         imagen {
           alternativeText
           formats {
-            medium {
+            thumbnail {
               childImageSharp {
                 fluid {
                   #srcSet

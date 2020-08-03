@@ -15,6 +15,7 @@ const Noticia = ({
   topic,
   imagen,
 }) => {
+  
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
 
@@ -27,10 +28,10 @@ const Noticia = ({
           ?
           <>
             {
-              imagen[0].formats.medium &&
+              imagen[0].formats.thumbnail &&
                 <Image
                   className="image"
-                  fluid={imagen[0].formats.medium.childImageSharp.fluid}
+                  fluid={imagen[0].formats.thumbnail.childImageSharp.fluid}
                   alt={imagen[0].alternativeText}
                 />
             }

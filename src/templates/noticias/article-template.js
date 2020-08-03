@@ -9,9 +9,11 @@ import ReactMarkdown from "react-markdown"
 import { FaRegClock, FaPrint } from "react-icons/fa"
 import { Link } from "gatsby"
 import Image from "gatsby-image"
+import Imagen from "../../components/Noticias/Imagen"
 
 const NoticiaTemplate = ({ data }) => {
   const {
+    strapiId,
     title,
     tiempoPlano,
     time,
@@ -59,25 +61,15 @@ const NoticiaTemplate = ({ data }) => {
           {anyo < 2018 ? (
             <>
               <div dangerouslySetInnerHTML={{ __html: hometext }} />
-              {imagen[0] && imagen[0].formats.medium &&(
-                <Image
-                  className="image"
-                  fluid={imagen[0].formats.medium.childImageSharp.fluid}
-                  alt={imagen[0].alternativeText}
-                />
-              )}
+              <Imagen imagen={imagen}/>
+              
               <p dangerouslySetInnerHTML={{ __html: bodytext }} />
             </>
           ) : (
             <>
               <ReactMarkdown source={hometext} />
-              {imagen[0] && (
-                <Image
-                  className="image"
-                  fluid={imagen[0].formats.medium.childImageSharp.fluid}
-                  alt={imagen[0].alternativeText}
-                />
-              )}
+              <Imagen imagen={imagen}/>
+              
               <ReactMarkdown source={bodytext} />
             </>
           )}
@@ -106,7 +98,23 @@ export const query = graphql`
       imagen {
         alternativeText
         formats {
+          large {
+            childImageSharp {
+              fluid {
+                #srcSet
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
           medium {
+            childImageSharp {
+              fluid {
+                #srcSet
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
+          small {
             childImageSharp {
               fluid {
                 #srcSet
