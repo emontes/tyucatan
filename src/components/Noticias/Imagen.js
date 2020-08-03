@@ -2,8 +2,6 @@ import React from 'react'
 import Image from "gatsby-image"
 
 const Imagen = ({imagen}) => {
-    console.log("Props de Imagen: ", imagen)
-    
     
     if (imagen[0]) {
         var fluid = imagen[0].formats.small.childImageSharp.fluid

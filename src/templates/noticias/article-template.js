@@ -8,12 +8,11 @@ import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 import { FaRegClock, FaPrint } from "react-icons/fa"
 import { Link } from "gatsby"
-import Image from "gatsby-image"
 import Imagen from "../../components/Noticias/Imagen"
 
 const NoticiaTemplate = ({ data }) => {
   const {
-    strapiId,
+    
     title,
     tiempoPlano,
     time,
@@ -22,7 +21,7 @@ const NoticiaTemplate = ({ data }) => {
     bodytext,
     imagen,
   } = data.article
-  console.log ("Articulo Id: ", strapiId)
+  
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
   return (

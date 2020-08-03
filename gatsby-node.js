@@ -105,25 +105,41 @@ exports.createPages = async ({ graphql, actions }) => {
         title: catego.title,
       },
     })
+  })
 
-    catego.articles.forEach(article => {
-      createPage({
-        path: `/article${article.id}.html`,      
-        component: path.resolve(`src/templates/noticias/article-template.js`),
-        context: {
-          strapiId: article.id
+  // Crea páginas de Noticias
+  const resultNoticias = await graphql(` 
+  {
+    articles:allStrapiArticle(sort: {order: DESC, fields: id}) {
+      nodes {
+        id
+        strapiId
+        imagen {
+          id
         }
-      })
+      }
+    }
+  }
+  `)
 
-      createPage({
-        path: `/printarticle-${article.id}.html`,      
-        component: path.resolve(`src/templates/noticias/article-print-template.js`),
-        context: {
-          strapiId: article.id
-        }
-      })
+  resultNoticias.data.articles.nodes.forEach(article => {
+    createPage({
+      path: `/article${article.strapiId}.html`,      
+      component: path.resolve(`src/templates/noticias/article-template.js`),
+      context: {
+        strapiId: article.strapiId
+      }
+    })
+
+    createPage({
+      path: `/printarticle-${article.strapiId}.html`,      
+      component: path.resolve(`src/templates/noticias/article-print-template.js`),
+      context: {
+        strapiId: article.strapiId
+      }
     })
   })
+
 
 }
 

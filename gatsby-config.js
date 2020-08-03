@@ -15,7 +15,12 @@ module.exports = {
     'gatsby-plugin-react-leaflet',
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-netlify`,
-    
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        sitemapSize: 5000
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
