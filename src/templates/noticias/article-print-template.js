@@ -1,12 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import Image from "gatsby-image"
-
 import ReactMarkdown from "react-markdown"
-
 import { graphql } from "gatsby"
+import Imagen from "../../components/Noticias/Imagen"
+
+
 const NoticiaTemplate = ({ data }) => {
   const {
+    strapiId,
     title,
     tiempoPlano,
     time,
@@ -15,7 +16,7 @@ const NoticiaTemplate = ({ data }) => {
     bodytext,
     imagen,
   } = data.article
-  const ligaRetorno = `https://tyucatan.com/article${data.article.strapiId}.html`
+  const ligaRetorno = `https://tyucatan.com/article${strapiId}.html`
 
   const fecha = new Date(tiempoPlano)
   const anyo = fecha.getFullYear()
@@ -36,17 +37,13 @@ const NoticiaTemplate = ({ data }) => {
         {anyo < 2018 ? (
           <>
             <div dangerouslySetInnerHTML={{ __html: hometext }} />
-            {imagen[0] && (
-              <Image fluid={imagen[0].formats.medium.childImageSharp.fluid} />
-            )}
+            <Imagen imagen={imagen}/>
             <div dangerouslySetInnerHTML={{ __html: bodytext }} />
           </>
         ) : (
           <>
             <ReactMarkdown source={hometext} />
-            {imagen[0] && (
-              <Image fluid={imagen[0].formats.medium.childImageSharp.fluid} />
-            )}
+            <Imagen imagen={imagen}/>
             <ReactMarkdown source={bodytext} />
           </>
         )}
@@ -59,6 +56,7 @@ const NoticiaTemplate = ({ data }) => {
     </Wrapper>
   )
 }
+
 export const query = graphql`
   query ArticlePrint($strapiId: Int) {
     article: strapiArticle(strapiId: { eq: $strapiId }) {
@@ -76,7 +74,23 @@ export const query = graphql`
       imagen {
         alternativeText
         formats {
+          large {
+            childImageSharp {
+              fluid {
+                #srcSet
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
           medium {
+            childImageSharp {
+              fluid {
+                #srcSet
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
+          small {
             childImageSharp {
               fluid {
                 #srcSet

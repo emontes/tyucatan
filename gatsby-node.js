@@ -110,13 +110,10 @@ exports.createPages = async ({ graphql, actions }) => {
   // Crea páginas de Noticias
   const resultNoticias = await graphql(` 
   {
-    articles:allStrapiArticle(sort: {order: DESC, fields: id}) {
+    articles:allStrapiArticle(sort: {order: DESC, fields: time}) {
       nodes {
         id
         strapiId
-        imagen {
-          id
-        }
       }
     }
   }
